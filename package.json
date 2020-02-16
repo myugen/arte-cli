@@ -1,0 +1,36 @@
+{
+  "name": "arte-cli",
+  "version": "0.0.1",
+  "description": "An ARTE cli to ease your common actions that you use everyday",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/myugen/arte-cli"
+  },
+  "keywords": [
+    "ARTESL",
+    "CLI"
+  ],
+  "author": "Miguel Ignacio Cabrera San Gil",
+  "license": "MIT",
+  "dependencies": {
+    "@octokit/auth-basic": "^1.4.0",
+    "@octokit/rest": "^16.43.1",
+    "chalk": "^3.0.0",
+    "clear": "^0.1.0",
+    "configstore": "^5.0.1",
+    "crypto-js": "^4.0.0",
+    "figlet": "^1.2.4",
+    "getenv": "^1.0.0",
+    "inquirer": "^7.0.4",
+    "lodash": "^4.17.15",
+    "make-dir": "^3.0.2",
+    "minimist": "^1.2.0",
+    "ora": "^4.0.3",
+    "simple-git": "^1.131.0",
+    "touch": "^3.1.0"
+  }
+}

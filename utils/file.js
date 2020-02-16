@@ -6,7 +6,9 @@ module.exports = {
     return path.basename(process.cwd());
   },
 
-  directoryExists: filePath => {
+  pathExists: filePath => {
     return fs.existsSync(filePath);
-  }
+  },
+
+  readJson: path => JSON.parse(fs.readFileSync(path, "utf8"))
 };

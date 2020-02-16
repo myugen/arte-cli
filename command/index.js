@@ -1,5 +1,4 @@
-const help = require("./help");
 const config = require("./config");
-const run = require("./run");
+const create = require("./create");
 
-module.exports = { help, config, run };
+module.exports = { config, create };

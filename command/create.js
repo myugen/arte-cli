@@ -3,17 +3,26 @@ const makedir = require("make-dir");
 const ora = require("ora");
 
 const utils = require("../utils");
-const { inquirer, files } = require("../lib");
+const { inquirer } = require("../lib");
 const config = require("./config");
 const settings = require("../settings");
 
 module.exports = {
-  exec: async defaultConf => {
+  command: "create",
+  describe: "Create project structure",
+  builder: yargs =>
+    yargs.option("config", {
+      description: "Provide a config file",
+      alias: "c",
+      type: "string"
+    }),
+  handler: async argv => {
     const spinner = ora(settings.ora());
-    const conf = utils.config.isValid(defaultConf)
-      ? defaultConf
+    const conf = utils.config.isValid(argv.storedConfig)
+      ? argv.storedConfig
       : await config.exec(defaultConf);
 
+    argv.header();
     console.log("💻 Set the correct info:");
     console.log();
     const { group, year, project } = await inquirer.askProjectParams();
@@ -26,7 +35,7 @@ module.exports = {
     const projectDirectory = await makedir(
       `${path}/${group.toUpperCase()}/${year}-${project}`
     );
-    if (files.directoryExists(`${projectDirectory}/${project}`)) {
+    if (utils.files.pathExists(`${projectDirectory}/${project}`)) {
       spinner.info(`The project structure was already created`);
     } else {
       const repository = `${git.url}/${group}/${project}`;

@@ -1,6 +1,6 @@
 const config = require("./config");
-const arguments = require("./arguments");
 const crypto = require("./crypto");
 const git = require("./git");
+const file = require("./file");
 
-module.exports = { config, arguments, crypto, git };
+module.exports = { config, crypto, git, file };

@@ -25,7 +25,7 @@ const init = () => {
       description: "Display help message"
     })
     .help("help")
-    .version("version", "version", `Current version: ${pkg.version}`)
+    .version("version", "Show version", `Current version: ${pkg.version}`)
     .alias("version", "v")
     .middleware(argv => {
       argv.storedConfig = conf;

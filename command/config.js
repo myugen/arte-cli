@@ -28,9 +28,9 @@ module.exports = {
     const conf = argv.storedConfig;
     const { path } = await inquirer.askBasePath();
     console.log();
+    const git = await inquirer.askGitCredentials();
     spinner.start("Setting your setup");
     conf.set("projects.path", path);
-    const git = await inquirer.askGitCredentials();
     conf.set("git.provider", git.provider);
     conf.set("git.url", git.url);
     conf.set("git.username", git.username);

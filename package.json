@@ -1,6 +1,6 @@
 {
   "name": "arte-cli",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "An ARTE cli to ease your common actions that you use everyday",
   "main": "bin/index.js",
   "scripts": {

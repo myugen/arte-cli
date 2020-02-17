@@ -1,5 +1,8 @@
+const ora = require("ora");
+
 const { inquirer } = require("../lib");
 const utils = require("../utils");
+const settings = require("../settings");
 
 module.exports = {
   command: "config",
@@ -19,10 +22,13 @@ module.exports = {
         }
       }),
   handler: async argv => {
+    const spinner = ora(settings.ora());
     console.log("⚙️ Set your setup:");
     argv.header();
     const conf = argv.storedConfig;
     const { path } = await inquirer.askBasePath();
+    console.log();
+    spinner.start("Setting your setup");
     conf.set("projects.path", path);
     const git = await inquirer.askGitCredentials();
     conf.set("git.provider", git.provider);
@@ -30,7 +36,9 @@ module.exports = {
     conf.set("git.username", git.username);
     const password = utils.crypto.encrypt(git.password);
     conf.set("git.password", password);
+    spinner.succeed("Configuration has setted succesfully 👍");
     console.log();
+
     return conf;
   }
 };

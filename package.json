@@ -7,6 +7,9 @@
     "test": "echo \"Error: no tests specified\" && exit 1",
     "arte": "./bin/index.js"
   },
+  "bin": {
+    "arte": "./bin/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "github.com/myugen/arte-cli"

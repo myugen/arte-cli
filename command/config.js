@@ -4,7 +4,7 @@ const { inquirer } = require("../lib");
 const utils = require("../utils");
 const settings = require("../settings");
 
-module.exports = {
+module.exports = dependencies => ({
   command: "config",
   describe: "Setup the CLI",
   builder: yargs =>
@@ -23,9 +23,9 @@ module.exports = {
       }),
   handler: async argv => {
     const spinner = ora(settings.ora());
+    const conf = dependencies.storedConfig;
     console.log("⚙️ Set your setup:");
-    argv.header();
-    const conf = argv.storedConfig;
+    dependencies.header();
     const { path } = await inquirer.askBasePath();
     console.log();
     const git = await inquirer.askGitCredentials();
@@ -41,4 +41,4 @@ module.exports = {
 
     return conf;
   }
-};
+});

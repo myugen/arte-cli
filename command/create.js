@@ -7,7 +7,7 @@ const { inquirer } = require("../lib");
 const config = require("./config");
 const settings = require("../settings");
 
-module.exports = {
+module.exports = dependencies => ({
   command: "create",
   describe: "Create project structure",
   builder: yargs =>
@@ -18,11 +18,11 @@ module.exports = {
     }),
   handler: async argv => {
     const spinner = ora(settings.ora());
-    const conf = utils.config.isValid(argv.storedConfig)
-      ? argv.storedConfig
+    const conf = utils.config.isValid(dependencies.storedConfig)
+      ? dependencies.storedConfig
       : await config.exec(defaultConf);
 
-    argv.header();
+    dependencies.header();
     console.log("💻 Set the correct info:");
     console.log();
     const { group, year, project } = await inquirer.askProjectParams();
@@ -35,7 +35,7 @@ module.exports = {
     const projectDirectory = await makedir(
       `${path}/${group.toUpperCase()}/${year}-${project}`
     );
-    if (utils.files.pathExists(`${projectDirectory}/${project}`)) {
+    if (utils.file.pathExists(`${projectDirectory}/${project}`)) {
       spinner.info(`The project structure was already created`);
     } else {
       const repository = `${git.url}/${group}/${project}`;
@@ -52,4 +52,4 @@ module.exports = {
         .catch(err => spinner.fail(`Ups! Something went wrong. ${err}`));
     }
   }
-};
+});

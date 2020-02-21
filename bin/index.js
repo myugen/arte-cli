@@ -14,12 +14,13 @@ const header = () => {
 };
 
 const init = () => {
-  const conf = new Configstore(pkg.name);
+  const storedConfig = new Configstore(pkg.name);
+  const dependencies = { storedConfig, header };
   const argv = yargs
     .usage("Usage: $0 <cmd> [options]") // usage string of application.
     .locale("en")
-    .command(create)
-    .command(config)
+    .command(create(dependencies))
+    .command(config(dependencies))
     .option("h", {
       alias: "help",
       description: "Display help message"
@@ -27,10 +28,6 @@ const init = () => {
     .help("help")
     .version("version", "Show version", `Current version: ${pkg.version}`)
     .alias("version", "v")
-    .middleware(argv => {
-      argv.storedConfig = conf;
-      argv.header = header;
-    })
     .showHelpOnFail(false, "Whoops, something went wrong! run with --help")
     .argv;
 };
